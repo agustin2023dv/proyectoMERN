@@ -18,5 +18,7 @@ app.get('/',(req,res)=>{
     res.send("WELCOME");
 })
 
-
+// Mounting restaurant routes for '/api/restaurants'.
+// I tell Express to use the routes defined in there for any request to api/restaurant
+app.use('/api/restaurants', require('./routes/restaurants'));
 module.exports = app;
