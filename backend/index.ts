@@ -1,13 +1,24 @@
-import express, {Express, Request, Response} from 'express';
+//Enviromental variables
 import dotenv from 'dotenv';
 
-dotenv.config();
-
-const app:Express= express();
-const port: string | number = process.env.PORT || 8000;
+import server from './src/server';
+import { LogError, LogSuccess } from './src/utils/logger';
 
 
+const port = process.env.PORT || 8000;
 
-app.listen(port, ()=>{
-    console.log('Port {port}')
+//* Execute server
+
+server.listen(port,() =>{
+    LogSuccess(`[SERVER ON]:Running in http://localhost:${port}/api`);
 })
+
+// * Control SERVER ERROR
+
+server.on('error',(error)=>{
+    LogError(`[SERVER ERROR]:${error}`);
+})
+
+
+// * Config of .env file
+dotenv.config();
